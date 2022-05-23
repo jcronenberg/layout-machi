@@ -272,10 +272,10 @@ function module.start(c, exit_keys)
     infobox.bgimage = draw_info
 
     local key_translate_tab = {
-        ["w"] = "Up",
-        ["a"] = "Left",
-        ["s"] = "Down",
-        ["d"] = "Right",
+        ["Up"] = "k",
+        ["Left"] = "h",
+        ["Down"] = "j",
+        ["Left"] = "l",
     }
 
     awful.client.focus.history.disable_tracking()
@@ -321,7 +321,7 @@ function module.start(c, exit_keys)
 
                 infobox.bgimage = draw_info
             end
-        elseif key == "Up" or key == "Down" or key == "Left" or key == "Right" then
+        elseif key == "k" or key == "j" or key == "h" or key == "l" then
             local current_area = selected_area()
 
             if c and (shift or ctrl) then
@@ -357,28 +357,28 @@ function module.start(c, exit_keys)
                 if not a.habitable then goto continue end
 
                 local v
-                if key == "Up" then
+                if key == "k" then
                     if a.x < traverse_x + threshold
                         and traverse_x < a.x + a.width + threshold then
                         v = traverse_y - a.y - a.height
                     else
                         v = -1
                     end
-                elseif key == "Down" then
+                elseif key == "j" then
                     if a.x < traverse_x + threshold
                         and traverse_x < a.x + a.width + threshold then
                         v = a.y - traverse_y
                     else
                         v = -1
                     end
-                elseif key == "Left" then
+                elseif key == "h" then
                     if a.y < traverse_y + threshold
                         and traverse_y < a.y + a.height + threshold then
                         v = traverse_x - a.x - a.width
                     else
                         v = -1
                     end
-                elseif key == "Right" then
+                elseif key == "l" then
                     if a.y < traverse_y + threshold
                         and traverse_y < a.y + a.height + threshold then
                         v = a.x - traverse_x
@@ -396,11 +396,11 @@ function module.start(c, exit_keys)
 
             if choice == nil then
                 choice = current_area
-                if key == "Up" then
+                if key == "k" then
                     traverse_y = screen.workarea.y
-                elseif key == "Down" then
+                elseif key == "j" then
                     traverse_y = screen.workarea.y + screen.workarea.height
-                elseif key == "Left" then
+                elseif key == "l" then
                     traverse_x = screen.workarea.x
                 else
                     traverse_x = screen.workarea.x + screen.workarea.width
